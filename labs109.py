@@ -64,4 +64,53 @@ def riffle(items, out = True):
     else:
         return items
 
+#4 check if integer contains only odd digits
+def only_odd_digits(n):
+    n = str(n)
+    for number in n:
+        if int(number) % 2 == 0:
+            return False
+            break
+    return True
+
+#5 calculate total # of blocks in a pyramid given n rows, m columns, h layers
+def pyramid_blocks(n, m, h):
+    count = 0
+    for i in range(0,h):
+        increment = n * m
+        count += increment
+        n += 1 
+        m += 1
+    return count
+
+#6 check if odd # of digits, middle is 0, no other 0s
+def is_cyclops(n):
+    #convert to string
+    n = str(n)
+    #count repeated 0s
+    counter = 0
+    for number in n:
+        if number == "0":
+            counter += 1
+
+    #check even digits
+    if (len(n)) % 2 == 0:
+        return False
+    #check if center is 0
+    elif n[len(n) // 2] != '0':
+        return False
+    #check if more than 1 zero
+    elif counter > 1:
+        return False
+    else:
+        return True
+
+#7 
+
+
+
+
+
+
+        
 
