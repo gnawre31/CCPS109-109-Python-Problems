@@ -1,7 +1,7 @@
 # Automated tester for the problems in the collection
 # "109 Python Problems for CCPS 109" by Ilkka Kokkarinen.
 
-# VERSION April 27, 2020, "Uniformity and Hardness"
+# VERSION May 26, 2020
 
 # Ilkka Kokkarinen, ilkka.kokkarinen@gmail.com
 
@@ -43,7 +43,6 @@ def canonize(result):
 # When reporting an error, make sure not to flood the user console.
     
 def emit_args(args, cutoff = 100):
-    #print('(' if type(args) == tuple else '[', end='')
     for (i, a) in enumerate(args):
         if i > 0:
             print(", ", end = '')
@@ -55,8 +54,7 @@ def emit_args(args, cutoff = 100):
                 right = ", ".join([str(x) for x in a[-5:]])     
                 print(f"[{left}, [{len(a)-10} omitted...], {right}]", end = '')
         else:
-            print(repr(a) if len(repr(a)) < 100 else '[...]', end = '')
-    #print(')' if type(args) == tuple else ']')
+             print(repr(a) if len(repr(a)) < 100 else '[...]', end = '')
     print()
 
 # Given two implementations of the same function specification, run
@@ -259,6 +257,7 @@ def is_ascending_generator(seed):
                 for k in range(rng.randint(0, 5)):
                     idx = rng.randint(1, len(items)-1)
                     items[idx-1], items[idx] = items[idx], items[idx-1]
+                    yield (items,)
 
 def safe_squares_generator(seed):
     rng = random.Random(seed)
@@ -1589,7 +1588,6 @@ def hitting_integer_powers_generator():
         for a in range(2, b):
             yield (a, b, 10**(2 + (a+b) % 3))
 
-
 # List of test cases for the 109 functions defined.        
           
 testcases = [    
@@ -2115,7 +2113,7 @@ testcases = [
         (
         "is_ascending",        
         is_ascending_generator(seed),
-        "e2b51f874af9be6d42ffed59478bc01f113e9d1744f930e346"
+        "0ec304f7cd0d1b7a4460570947b05af1756a2510a5ba5ba9f1"
         ),
         (
         "double_until_all_digits",
@@ -2268,6 +2266,8 @@ except Exception:
 
 
 import os.path
+
+#discrepancy(labs109.brangelina, brangelina, brangelina_generator())
 
 if os.path.exists(recordfile):
     known, curr = dict(), ''
